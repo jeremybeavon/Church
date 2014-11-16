@@ -228,3 +228,7 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+
+[Tt]est[Bb]inaries/
+[Aa]pp_[Dd]ata/
+Church.Web/[Dd]eveloper

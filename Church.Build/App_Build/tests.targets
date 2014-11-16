@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="Tests-AfterBuild" AfterTargets="AfterBuild" Condition="'$(Configuration)' == 'Release'">
+    <PropertyGroup>
+      <TestSolutionDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\'))</TestSolutionDirectory>
+      <TestsDirectory>$(TestSolutionDirectory)Tests\</TestsDirectory>
+      <UnitTestPath>$(TestsDirectory)Church.UnitTests\bin\Release\Church.UnitTests.dll</UnitTestPath>
+      <IntegrationTestPath>$(TestsDirectory)Church.IntegrationTests\bin\Release\Church.Integration.dll</IntegrationTestPath>
+      <TestsOutputPath>$(TestSolutionDirectory)Church.Web\Developer\</TestsOutputPath>
+      <UnitTestOutputPath>$(TestsOutputPath)UnitTestResults\</UnitTestOutputPath>
+      <IntegrationTestOutputPath>$(TestsOutputPath)IntegrationTestResults\</IntegrationTestOutputPath>
+      <UnitTestCoveragePath>$(UnitTestOutputPath)Coverage.xml</UnitTestCoveragePath>
+      <IntegrationTestCoveragePath>$(IntegrationTestOutputPath)Coverage.xml</IntegrationTestCoveragePath>
+      <UnitTestCoverageDirectory>$(UnitTestOutputPath)Coverage</UnitTestCoverageDirectory>
+      <IntegrationTestCoverageDirectory>$(IntegrationTestOutputPath)Coverage.xml</IntegrationTestCoverageDirectory>
+      <ReportCommand>&quot;$(TestSolutionDirectory)packages\ReportGenerator.2.0.1.0\ReportGenerator.exe&quot;</ReportCommand>
+      <TestCommand>&quot;$(TestSolutionDirectory)packages\OpenCover.4.5.3207\OpenCover.Console.exe&quot;</TestCommand>
+      <TestCommand>$(TestCommand) -filter:&quot;+[Church*]* -[Church.*Test*]*&quot;</TestCommand>
+      <TestCommand>$(TestCommand) -register:user</TestCommand>
+      <TestCommand>$(TestCommand) -coverbytest:+Church.*Tests.dll</TestCommand>
+      <TestCommand>$(TestCommand) -mergebyhash</TestCommand>
+      <TestTargetArgs>-targetargs:&quot;</TestTargetArgs>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(APPVEYOR_CI_BUILD)' == ''">
+      <VsTestConsolePath>$(DevEnvDir)CommonExtensions\Microsoft\TestWindow\vstest.console.exe</VsTestConsolePath>
+      <TestCommand>$(TestCommand) -target:&quot;$(VsTestConsolePath)&quot;</TestCommand>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(APPVEYOR_CI_BUILD)' != ''">
+      <TestCommand>$(TestCommand) -target:vstest.console.exe</TestCommand>
+    </PropertyGroup>
+    <PropertyGroup>
+      <TestCommand>$(TestCommand) -targetargs:&quot;/inIsolation</TestCommand>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(APPVEYOR_CI_BUILD)' != ''">
+      <TestCommand>$(TestCommand) /logger:AppVeyor</TestCommand>
+    </PropertyGroup>
+    <PropertyGroup>
+      <UnitTestCommand>$(TestCommand) &quot;&quot;$(UnitTestPath)&quot;&quot;&quot;</UnitTestCommand>
+      <UnitTestCommand>$(UnitTestCommand) -output:&quot;$(UnitTestCoveragePath)&quot;</UnitTestCommand>
+      <IntegrationTestCommand>$(TestCommand) &quot;&quot;$(IntegrationTestPath)&quot;&quot;&quot;</IntegrationTestCommand>
+      <IntegrationTestCommand>$(IntegrationTestCommand) -output:&quot;$(IntegrationTestCoveragePath)&quot;</IntegrationTestCommand>
+      <UnitTestReportCommand>$(ReportCommand) -reports:&quot;$(UnitTestCoveragePath)&quot;</UnitTestReportCommand>
+      <UnitTestReportCommand>$(UnitTestReportCommand) -targetdir:&quot;$(UnitTestCoverageDirectory)&quot;</UnitTestReportCommand>
+      <IntegrationTestReportCommand>$(ReportCommand) -reports:&quot;$(IntegrationTestCoveragePath)&quot;</IntegrationTestReportCommand>
+      <IntegrationTestReportCommand>$(IntegrationTestReportCommand) -targetdir:&quot;$(IntegrationTestCoverageDirectory)&quot;</IntegrationTestReportCommand>
+    </PropertyGroup>
+    <MakeDir Directories="$(TestsOutputPath);$(UnitTestOutputPath);$(IntegrationTestOutputPath)" />
+    <MakeDir Directories="$(UnitTestCoverageDirectory);$(IntegrationTestCoverageDirectory)" />
+    <Exec Command="$(UnitTestCommand)" WorkingDirectory="$(UnitTestOutputPath)" />
+    <Exec Command="$(UnitTestReportCommand)" WorkingDirectory="$(UnitTestOutputPath)" />
+    <!--<Exec Command="$(IntegrationTestCommand)" WorkingDirectory="$(IntegrationTestOutputPath)" />
+    <Exec Command="$(IntegrationTestReportCommand)" WorkingDirectory="$(IntegrationTestOutputPath)" />-->
+  </Target>
+</Project>

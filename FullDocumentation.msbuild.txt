@@ -1,0 +1,1 @@
+msbuild FullDocumentation.shfbproj /p:Platform=AnyCPU /p:Verbose=true

@@ -1,0 +1,1 @@
+{"version":3,"file":"Needs.js","sourceRoot":"","sources":["Needs.ts"],"names":[],"mappings":"AAAA;IAEA,IAAI,CAAC,aAAa,CAAC,aAAa,EAAE;QAAC,QAAQ,EAAE,MAAM,EAAE,UAAU,MAA6B,EAAE,IAAoB;YAC9G,MAAM,CAAC,IAAI,GAAG;gBACV,GAAG,EAAE,IAAI,CAAC,kBAAkB,CAAC,sDAAsD,CAAC;aACvF;QACL,CAAC,CAAC,CAAC;GACH"}

@@ -1,0 +1,12 @@
+﻿<div ng-controller="welcome">
+    <h2>Burundi</h2>
+    <h3>Prayer Needs</h3>
+    <ol>
+        <li ng-repeat="Request in data.Requests">
+            <a href="#/Private/Prayer/Needs/{{Request.Id}}">{{Request.Name}}</a>
+            by {{Request.RequestedBy.Name}} on {{Request.RequestDate}}
+        </li>
+    </ol>
+    <!--<a href="#/Private/Prayer/Needs/{{data.Id}}">See more</a>-->
+    <a href="#/Private/Prayer/Request/{{data.Id}}">Add prayer need</a>
+</div>

@@ -1,0 +1,11 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <StyleCopOverrideSettingsFile>$(ProjectDir)..\DebugSettings.StyleCop</StyleCopOverrideSettingsFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <StyleCopOverrideSettingsFile>$(ProjectDir)..\ReleaseSettings.StyleCop</StyleCopOverrideSettingsFile>
+  </PropertyGroup>
+</Project>
