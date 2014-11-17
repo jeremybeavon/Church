@@ -187,8 +187,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AntiForgeryHelper.cs" />
-    <Compile Include="App_Packages\TaskHelpers.Sources.0.3\TaskHelpers.cs" />
-    <Compile Include="App_Packages\TaskHelpers.Sources.0.3\TaskHelpersExtensions.cs" />
     <Compile Include="Dependencies\BindingToExtensions.cs" />
     <Compile Include="Dependencies\WebDependencyResolver.cs" />
     <Compile Include="Dependencies\WebDependencyScope.cs" />
