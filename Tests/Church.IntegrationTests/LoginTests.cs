@@ -45,7 +45,7 @@ namespace Church.IntegrationTests
             AbstractDataAccess.Store = null;
         }
 
-        /*[TestMethod]
+        [TestMethod]
         [RunInDifferentAppDomain]
         public void TestSuccessfulLogin()
         {
@@ -66,20 +66,21 @@ namespace Church.IntegrationTests
             {
                 //EdgeJs.NativeModuleSupport.EdgeWithNativeModules.RegisterPreCompiledModules("zombie");
                 Browser browser = await BrowserFactory.CreateAsync();
-                await browser.VisitAsync(new Uri("http://localhost.test/"));
-                await browser.WaitAsync();
-                string text = await browser.TextAsync("#userNameLabel");
-                text.GetHashCode();
+                await browser.VisitAsync(new Uri("https://localhost.test/"));
                 await browser.FillAsync(LoginPage.UserName, "TestUser");
                 await browser.FillAsync(LoginPage.Password, "test");
+                string initialHtml = await browser.HtmlAsync();
+                initialHtml.GetHashCode();
                 await browser.PressButtonAsync(LoginPage.LogInButton);
+                string html = await browser.HtmlAsync();
+                html.GetHashCode();
                 hash = await (await browser.GetLocationAsync()).GetHashAsync();
                 title = await browser.TextAsync(LoginPage.Title);
             }))().Wait();
 
             // Assert
-            hash.Should().NotBeNull();
-            hash.ToLower().Should().Contain("private");
-        }*/
+            //hash.Should().NotBeNull();
+            //hash.ToLower().Should().Contain("private");
+        }
     }
 }

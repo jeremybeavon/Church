@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using AppDomainAspects;
+using AppDomainCallbackExtensions;
 using Church.TestingCommon;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PortlessWebHost;
+using TextSerialization;
 
-namespace Church.IntegrationTests
+namespace Church.IntegrationTests.Framework
 {
     [TestClass]
     public static class IntegrationTestAssemblySetup
@@ -20,6 +23,7 @@ namespace Church.IntegrationTests
             string physicalPath = Path.GetFullPath(Path.Combine(baseDirectory, @"..\Church.Web\"));
             host = new WebHost("/", physicalPath);
             DefaultAppDomainProvider.AppDomain = host.Domain;
+            host.Domain.CreateInstanceFromAndUnwrap<TraceInitializer>().InitializeTracing(AppDomain.CurrentDomain);
         }
 
         [AssemblyCleanup]

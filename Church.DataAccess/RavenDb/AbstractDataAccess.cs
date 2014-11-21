@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using NullGuard;
 using Raven.Client;
 using Raven.Client.Embedded;
 
@@ -24,6 +25,7 @@ namespace Church.DataAccess.RavenDb
         /// <summary>
         /// Gets or sets the current RavenDb document store.
         /// </summary>
+        [AllowNull]
         public static IDocumentStore Store
         {
             get { return store ?? DefaultStore.Value; }
