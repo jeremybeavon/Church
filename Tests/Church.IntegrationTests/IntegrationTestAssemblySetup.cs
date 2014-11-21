@@ -20,7 +20,6 @@ namespace Church.IntegrationTests
             string physicalPath = Path.GetFullPath(Path.Combine(baseDirectory, @"..\Church.Web\"));
             host = new WebHost("/", physicalPath);
             DefaultAppDomainProvider.AppDomain = host.Domain;
-            EdgeJs.Edge.Func(@"return function (data, callback) { console.log('This is test'); callback(null, 'Test'); };")(null).Wait();
         }
 
         [AssemblyCleanup]
