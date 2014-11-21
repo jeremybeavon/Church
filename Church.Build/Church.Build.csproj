@@ -74,14 +74,11 @@
     <None Include="App_Build\documentation.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="App_Build\gulp.targets" />
-    <None Include="App_Build\node.targets" />
     <None Include="App_Build\publish.targets" />
     <None Include="App_Build\tests.targets" />
     <None Include="gulp.cmd" />
     <None Include="node.cmd" />
     <None Include="npm.cmd" />
-    <None Include="package.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

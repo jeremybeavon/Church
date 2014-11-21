@@ -15,8 +15,6 @@ namespace Church.TestingCommon
         public const string MsTestKey = "mstest";
         private const BindingFlags PrivateStaticFlags = BindingFlags.NonPublic | BindingFlags.Static;
 
-        public static readonly IDictionary Frameworks = (IDictionary)FrameworksField.GetValue(null);
-
         private static readonly Type TestFrameworkProviderType = 
             typeof(ObjectAssertionsExtensions).Assembly.GetType("FluentAssertions.Execution.TestFrameworkProvider");
 
@@ -25,6 +23,8 @@ namespace Church.TestingCommon
 
         private static readonly FieldInfo TestFrameworkField =
             TestFrameworkProviderType.GetField("testFramework", PrivateStaticFlags);
+
+        public static readonly IDictionary Frameworks = (IDictionary)FrameworksField.GetValue(null);
 
         public static object TestFramework
         {

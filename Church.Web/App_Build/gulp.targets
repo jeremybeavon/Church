@@ -11,9 +11,9 @@
   </Target>
   -->
   
-  <!--<Target Name="Gulp-AfterCompile" AfterTargets="AfterCompile">
+  <Target Name="Gulp-AfterCompile" AfterTargets="AfterCompile">
     <GulpWithTsLint Gulpfile="App_Build\gulpfile.js" />
-  </Target>-->
+  </Target>
   
   <!--
   <Target Name="Gulp-AfterBuild" AfterTargets="AfterBuild">

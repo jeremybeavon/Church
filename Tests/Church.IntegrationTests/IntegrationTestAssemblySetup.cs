@@ -1,29 +1,30 @@
 ﻿using System;
 using System.IO;
 using AppDomainAspects;
+using Church.TestingCommon;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PortlessWebHost;
-using CommonMsTestAssemblySetup = Church.TestingCommon.MsTestAssemblySetup;
 
 namespace Church.IntegrationTests
 {
     [TestClass]
-    public sealed class MsTestAssemblySetup : CommonMsTestAssemblySetup
+    public static class IntegrationTestAssemblySetup
     {
-        private WebHost host;
+        private static WebHost host;
 
         [AssemblyInitialize]
-        public override void InitializeAssembly()
+        public static void InitializeAssembly(TestContext context)
         {
-            base.InitializeAssembly();
+            MsTestAssemblySetup.Initialize();
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string physicalPath = Path.Combine(baseDirectory, @"..\Church.Web");
+            string physicalPath = Path.GetFullPath(Path.Combine(baseDirectory, @"..\Church.Web\"));
             host = new WebHost("/", physicalPath);
             DefaultAppDomainProvider.AppDomain = host.Domain;
+            EdgeJs.Edge.Func(@"return function (data, callback) { console.log('This is test'); callback(null, 'Test'); };")(null).Wait();
         }
 
         [AssemblyCleanup]
-        public void CleanUpAssembly()
+        public static void CleanUpAssembly()
         {
             DefaultAppDomainProvider.AppDomain = null;
             host.Dispose();

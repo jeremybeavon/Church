@@ -17,7 +17,7 @@
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
-    <NuGetPackageImportStamp>2a4798a4</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>61583aaa</NuGetPackageImportStamp>
     <DontImportPostSharp>True</DontImportPostSharp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -46,8 +46,9 @@
     <AssemblyOriginatorKeyFile>Church.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AppDomainAspects">
-      <HintPath>..\..\packages\AppDomainAspects.1.0.0\lib\AppDomainAspects.dll</HintPath>
+    <Reference Include="AppDomainAspects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\AppDomainAspects.1.0.1\lib\AppDomainAspects.dll</HintPath>
     </Reference>
     <Reference Include="AppDomainCallbackExtensions">
       <HintPath>..\..\packages\AppDomainCallbackExtensions.1.0.4\lib\net40\AppDomainCallbackExtensions.dll</HintPath>
@@ -160,11 +161,11 @@
     </Reference>
     <Reference Include="Zombie.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Zombie.Net.0.0.6-alpha\lib\net45\Zombie.Net.dll</HintPath>
+      <HintPath>..\..\packages\Zombie.Net.0.0.8-alpha\lib\net45\Zombie.Net.dll</HintPath>
     </Reference>
     <Reference Include="Zombie.Net.PortlessWebHost, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Zombie.Net.PortlessWebHost.0.0.2-alpha\lib\net45\Zombie.Net.PortlessWebHost.dll</HintPath>
+      <HintPath>..\..\packages\Zombie.Net.PortlessWebHost.0.0.3-alpha\lib\net45\Zombie.Net.PortlessWebHost.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>
@@ -182,7 +183,8 @@
   <ItemGroup>
     <Compile Include="BrowserFactory.cs" />
     <Compile Include="LoginTests.cs" />
-    <Compile Include="MsTestAssemblySetup.cs" />
+    <Compile Include="IntegrationTestAssemblySetup.cs" />
+    <Compile Include="Pages\DefaultPage.cs" />
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -279,7 +281,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Ncapsulate.Node.0.10.28\build\Ncapsulate.Node.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Ncapsulate.Node.0.10.28\build\Ncapsulate.Node.targets'))" />
     <Error Condition="!Exists('..\..\packages\EdgeJs.NativeModuleSupport.0.9.2.3\build\EdgeJs.NativeModuleSupport.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\EdgeJs.NativeModuleSupport.0.9.2.3\build\EdgeJs.NativeModuleSupport.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Zombie.Net.0.0.6-alpha\build\Zombie.Net.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Zombie.Net.0.0.6-alpha\build\Zombie.Net.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Zombie.Net.0.0.8-alpha\build\Zombie.Net.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Zombie.Net.0.0.8-alpha\build\Zombie.Net.targets'))" />
   </Target>
   <Import Project="..\..\packages\EdgeJs.NativeModuleSupport.0.9.2.3\build\EdgeJs.NativeModuleSupport.targets" Condition="Exists('..\..\packages\EdgeJs.NativeModuleSupport.0.9.2.3\build\EdgeJs.NativeModuleSupport.targets')" />
   <Import Project="..\..\packages\PostSharp.4.0.36\tools\PostSharp.targets" Condition="Exists('..\..\packages\PostSharp.4.0.36\tools\PostSharp.targets')" />
@@ -287,7 +289,7 @@
     <Error Condition="!Exists('..\..\packages\PostSharp.4.0.36\tools\PostSharp.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore." />
     <Error Condition="Exists('..\..\packages\PostSharp.4.0.36\tools\PostSharp.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://www.postsharp.net/links/nuget-restore." />
   </Target>
-  <Import Project="..\..\packages\Zombie.Net.0.0.6-alpha\build\Zombie.Net.targets" Condition="Exists('..\..\packages\Zombie.Net.0.0.6-alpha\build\Zombie.Net.targets')" />
+  <Import Project="..\..\packages\Zombie.Net.0.0.8-alpha\build\Zombie.Net.targets" Condition="Exists('..\..\packages\Zombie.Net.0.0.8-alpha\build\Zombie.Net.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

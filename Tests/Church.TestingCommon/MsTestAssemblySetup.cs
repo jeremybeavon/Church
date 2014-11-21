@@ -7,11 +7,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Church.TestingCommon
 {
-    [TestClass]
-    public abstract class MsTestAssemblySetup
+    public static class MsTestAssemblySetup
     {
-        [AssemblyInitialize]
-        public virtual void InitializeAssembly()
+        public static void Initialize()
         {
             TestFrameworkProvider.TestFramework = TestFrameworkProvider.Frameworks[TestFrameworkProvider.MsTestKey];
         }

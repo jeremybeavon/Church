@@ -77,7 +77,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="MockTest.cs" />
-    <Compile Include="MsTestAssemblySetup.cs" />
+    <Compile Include="UnitTestAssemblySetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\IdentityExtensionsTests.cs" />
   </ItemGroup>

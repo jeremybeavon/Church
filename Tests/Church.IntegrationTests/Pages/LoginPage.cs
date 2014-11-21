@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Church.IntegrationTests.Pages
 {
-    public static class LoginPage
+    public abstract class LoginPage : DefaultPage
     {
         public const string UserName = "userName";
 

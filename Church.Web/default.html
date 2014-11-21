@@ -17,7 +17,7 @@
         <div class="row" ng-if="data.showLogin">
             <form class="form-horizontal" style="margin-top: 50px" ng-submit="data.login.login()" action="javascript: void(0)">
                 <div class="form-group">
-                    <label for="userName" class="col-sm-2 control-label">{{translations.userName}}</label>
+                    <label for="userName" class="col-sm-2 control-label" id="userNameLabel">{{translations.userName}}</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="userName" ng-model="data.login.userName" placeholder="{{translations.userName}}">
                     </div>
