@@ -21,7 +21,7 @@ namespace Church.IntegrationTests.Framework
             MsTestAssemblySetup.Initialize();
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string physicalPath = Path.GetFullPath(Path.Combine(baseDirectory, @"..\Church.Web\"));
-            host = new WebHost("/", physicalPath);
+            host = new WebHost("/", physicalPath, Protocol.Https);
             DefaultAppDomainProvider.AppDomain = host.Domain;
             host.Domain.CreateInstanceFromAndUnwrap<TraceInitializer>().InitializeTracing(AppDomain.CurrentDomain);
         }

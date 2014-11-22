@@ -7,7 +7,7 @@ namespace Church.UnitTests
     public sealed class UnitTestAssemblySetup
     {
         [AssemblyInitialize]
-        public static void InitializeAssembly()
+        public static void InitializeAssembly(TestContext context)
         {
             MsTestAssemblySetup.Initialize();
         }

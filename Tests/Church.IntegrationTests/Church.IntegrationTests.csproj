@@ -116,8 +116,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="PortlessWebHost">
-      <HintPath>..\..\packages\PortlessWebHost.1.0.5\lib\PortlessWebHost.dll</HintPath>
+    <Reference Include="PortlessWebHost, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\PortlessWebHost.1.0.7\lib\PortlessWebHost.dll</HintPath>
     </Reference>
     <Reference Include="PostSharp, Version=4.0.36.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -165,7 +166,7 @@
     </Reference>
     <Reference Include="Zombie.Net.PortlessWebHost, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Zombie.Net.PortlessWebHost.0.0.3-alpha\lib\net45\Zombie.Net.PortlessWebHost.dll</HintPath>
+      <HintPath>..\..\packages\Zombie.Net.PortlessWebHost.0.0.4-alpha\lib\net45\Zombie.Net.PortlessWebHost.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>

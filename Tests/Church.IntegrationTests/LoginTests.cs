@@ -42,6 +42,7 @@ namespace Church.IntegrationTests
         [RunInDifferentAppDomain]
         public void TearDown()
         {
+            documentStore.Dispose();
             AbstractDataAccess.Store = null;
         }
 
@@ -53,34 +54,31 @@ namespace Church.IntegrationTests
             IDocumentSession session = documentStore.OpenSession();
             User user = new User()
             {
-                Id = Guid.NewGuid().ToString("N"),
+                Id = Guid.NewGuid().ToString(),
                 FullName = "Test User",
                 UserName = "TestUser",
                 PasswordHash = new PasswordHasher().HashPassword("test")
             };
+            session.Store(user);
+            session.SaveChanges();
 
             // Act
             string hash = null;
             string title = null;
             ((Func<Task>)(async () =>
             {
-                //EdgeJs.NativeModuleSupport.EdgeWithNativeModules.RegisterPreCompiledModules("zombie");
                 Browser browser = await BrowserFactory.CreateAsync();
                 await browser.VisitAsync(new Uri("https://localhost.test/"));
                 await browser.FillAsync(LoginPage.UserName, "TestUser");
                 await browser.FillAsync(LoginPage.Password, "test");
-                string initialHtml = await browser.HtmlAsync();
-                initialHtml.GetHashCode();
                 await browser.PressButtonAsync(LoginPage.LogInButton);
-                string html = await browser.HtmlAsync();
-                html.GetHashCode();
                 hash = await (await browser.GetLocationAsync()).GetHashAsync();
                 title = await browser.TextAsync(LoginPage.Title);
             }))().Wait();
 
             // Assert
-            //hash.Should().NotBeNull();
-            //hash.ToLower().Should().Contain("private");
+            hash.Should().NotBeNull();
+            hash.ToLower().Should().Contain("private");
         }
     }
 }
