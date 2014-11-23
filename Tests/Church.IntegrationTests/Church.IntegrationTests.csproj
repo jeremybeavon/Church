@@ -69,6 +69,9 @@
     <Reference Include="FiddlerCore4">
       <HintPath>..\..\packages\FiddlerCore.4.4.8.4\lib\net40\FiddlerCore4.dll</HintPath>
     </Reference>
+    <Reference Include="FlickrNet">
+      <HintPath>..\..\packages\FlickrNet.3.15.0\lib\net20\FlickrNet.dll</HintPath>
+    </Reference>
     <Reference Include="FluentAssertions">
       <HintPath>..\..\packages\FluentAssertions.3.2.1\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
@@ -184,7 +187,12 @@
   <ItemGroup>
     <Compile Include="BrowserFactory.cs" />
     <Compile Include="Framework\CrossDomainTraceListener.cs" />
-    <Compile Include="Framework\TraceInitializer.cs" />
+    <Compile Include="Framework\FlickrRequestFactory.cs" />
+    <Compile Include="Framework\IntegrationTestAppDomainProvider.cs" />
+    <Compile Include="Framework\IntegrationTestModule.cs" />
+    <Compile Include="Framework\IntegrationTestWebAppDomainProvider.cs" />
+    <Compile Include="Framework\TestFlickrApi.cs" />
+    <Compile Include="Framework\IntegrationTestInitializer.cs" />
     <Compile Include="LoginTests.cs" />
     <Compile Include="Framework\IntegrationTestAssemblySetup.cs" />
     <Compile Include="Pages\DefaultPage.cs" />
@@ -193,6 +201,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Church.BusinessRules\Church.BusinessRules.csproj">
+      <Project>{8308fb1a-8ac6-480e-abad-37670a18d36a}</Project>
+      <Name>Church.BusinessRules</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Church.Common\Church.Common.csproj">
       <Project>{ae562b72-4d48-4783-aaa7-a16bf07ce601}</Project>
       <Name>Church.Common</Name>

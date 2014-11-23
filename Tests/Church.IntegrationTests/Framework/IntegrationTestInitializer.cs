@@ -4,15 +4,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using AppDomainAspects;
 
 namespace Church.IntegrationTests.Framework
 {
-    internal sealed class TraceInitializer : MarshalByRefObject
+    internal sealed class IntegrationTestInitializer : MarshalByRefObject
     {
-        public void InitializeTracing(AppDomain destinationDomain)
+        public void Initialize(AppDomain destinationDomain)
         {
             Trace.Listeners.Add(new CrossDomainTraceListener(destinationDomain));
-            Trace.WriteLine("This is a test.");
+            HttpApplication.RegisterModule(typeof(IntegrationTestModule));
+            RunInDifferentAppDomainAttribute.AppDomainProvider = new IntegrationTestAppDomainProvider(destinationDomain);
         }
 
         public override object InitializeLifetimeService()

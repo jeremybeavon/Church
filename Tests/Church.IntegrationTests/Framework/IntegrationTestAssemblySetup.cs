@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
+using System.Net;
 using AppDomainAspects;
 using AppDomainCallbackExtensions;
 using Church.TestingCommon;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PortlessWebHost;
-using TextSerialization;
 
 namespace Church.IntegrationTests.Framework
 {
@@ -22,8 +21,9 @@ namespace Church.IntegrationTests.Framework
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string physicalPath = Path.GetFullPath(Path.Combine(baseDirectory, @"..\Church.Web\"));
             host = new WebHost("/", physicalPath, Protocol.Https);
-            DefaultAppDomainProvider.AppDomain = host.Domain;
-            host.Domain.CreateInstanceFromAndUnwrap<TraceInitializer>().InitializeTracing(AppDomain.CurrentDomain);
+            RunInDifferentAppDomainAttribute.AppDomainProvider = new IntegrationTestWebAppDomainProvider(host.Domain);
+            host.Domain.CreateInstanceFromAndUnwrap<IntegrationTestInitializer>().Initialize(AppDomain.CurrentDomain);
+            InitializeFlickr();
         }
 
         [AssemblyCleanup]
@@ -31,6 +31,11 @@ namespace Church.IntegrationTests.Framework
         {
             DefaultAppDomainProvider.AppDomain = null;
             host.Dispose();
+        }
+
+        private static void InitializeFlickr()
+        {
+            WebRequest.RegisterPrefix("https", new FlickrRequestFactory());
         }
     }
 }
