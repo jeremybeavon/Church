@@ -47,11 +47,17 @@ var pageDetails: any = {
     url: "",
     title: "",
     showLogin: requestValidationToken === "",
+    showLoginFailed: false,
     login: {
         userName: "",
         password: "",
         login: null
     }
+};
+
+var loginStatus: any = {
+    Success: 1,
+    IncorrectUserNameOrPassword: 2
 };
 
 class Page {
@@ -62,7 +68,7 @@ class Page {
         };
 
         api.post<any>("/login", request).success(function (response: any): void {
-            if (response.LoginStatus === 1) {
+            if (response.LoginStatus === loginStatus.Success) {
                 requestValidationToken = response.RequestValidationToken;
                 pageDetails.showLogin = false;
                 if ($window.location.hash.indexOf("Private") > 0) {
@@ -71,7 +77,8 @@ class Page {
                     $window.location.hash = "Private/Welcome";
                 }
             } else {
-                alert("error: something bad happened.");
+                pageDetails.showLoginFailed = true;
+                updateMasterPage();
             }
         });
     }
@@ -162,7 +169,8 @@ export function initialize(): void {
         $scope.translations = {
             userName: "User Name",
             password: "Password",
-            logIn: "Log in"
+            logIn: "Log in",
+            loginFailed: "User name or password incorrect."
         };
         pageDetails.login.login = function (): void {
             Page.login($window, api);

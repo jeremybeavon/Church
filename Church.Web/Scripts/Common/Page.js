@@ -46,11 +46,17 @@
         url: "",
         title: "",
         showLogin: requestValidationToken === "",
+        showLoginFailed: false,
         login: {
             userName: "",
             password: "",
             login: null
         }
+    };
+
+    var loginStatus = {
+        Success: 1,
+        IncorrectUserNameOrPassword: 2
     };
 
     var Page = (function () {
@@ -63,7 +69,7 @@
             };
 
             api.post("/login", request).success(function (response) {
-                if (response.LoginStatus === 1) {
+                if (response.LoginStatus === loginStatus.Success) {
                     requestValidationToken = response.RequestValidationToken;
                     pageDetails.showLogin = false;
                     if ($window.location.hash.indexOf("Private") > 0) {
@@ -72,7 +78,8 @@
                         $window.location.hash = "Private/Welcome";
                     }
                 } else {
-                    alert("error: something bad happened.");
+                    pageDetails.showLoginFailed = true;
+                    exports.updateMasterPage();
                 }
             });
         };
@@ -152,7 +159,8 @@
                 $scope.translations = {
                     userName: "User Name",
                     password: "Password",
-                    logIn: "Log in"
+                    logIn: "Log in",
+                    loginFailed: "User name or password incorrect."
                 };
                 pageDetails.login.login = function () {
                     Page.login($window, api);

@@ -80,5 +80,25 @@ namespace Church.IntegrationTests
             hash.Should().NotBeNull();
             hash.ToLower().Should().Contain("private");
         }
+
+        [TestMethod]
+        [RunInDifferentAppDomain]
+        public void TestLoginFailedMessageIsVisibleWhenLoginIsUnsuccessful()
+        {
+            // Act
+            Element element = null;
+            ((Func<Task>)(async () =>
+            {
+                Browser browser = await BrowserFactory.CreateAsync();
+                await browser.VisitAsync(new Uri("https://localhost.test/"));
+                await browser.FillAsync(LoginPage.UserName, "TestUser");
+                await browser.FillAsync(LoginPage.Password, "test");
+                await browser.PressButtonAsync(LoginPage.LogInButton);
+                element = await browser.QueryAsync("#loginFailedMessage");
+            }))().Wait();
+
+            // Assert
+            element.Should().NotBeNull();
+        }
     }
 }

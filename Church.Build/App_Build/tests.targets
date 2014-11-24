@@ -48,7 +48,7 @@
     <MakeDir Directories="$(UnitTestCoverageDirectory);$(IntegrationTestCoverageDirectory)" />
     <Exec Command="$(UnitTestCommand)" WorkingDirectory="$(UnitTestOutputPath)" />
     <Exec Command="$(UnitTestReportCommand)" WorkingDirectory="$(UnitTestOutputPath)" />
-    <!--<Exec Command="$(IntegrationTestCommand)" WorkingDirectory="$(IntegrationTestOutputPath)" />
-    <Exec Command="$(IntegrationTestReportCommand)" WorkingDirectory="$(IntegrationTestOutputPath)" />-->
+    <Exec Command="$(IntegrationTestCommand)" WorkingDirectory="$(IntegrationTestOutputPath)" />
+    <Exec Command="$(IntegrationTestReportCommand)" WorkingDirectory="$(IntegrationTestOutputPath)" />
   </Target>
 </Project>
