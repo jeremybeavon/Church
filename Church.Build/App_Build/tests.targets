@@ -3,9 +3,8 @@
   <Target Name="Tests-AfterBuild" AfterTargets="AfterBuild" Condition="'$(Configuration)' == 'Release'">
     <PropertyGroup>
       <TestSolutionDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\'))</TestSolutionDirectory>
-      <TestsDirectory>$(TestSolutionDirectory)Tests\</TestsDirectory>
-      <UnitTestPath>$(TestsDirectory)Church.UnitTests\bin\Release\Church.UnitTests.dll</UnitTestPath>
-      <IntegrationTestPath>$(TestsDirectory)Church.IntegrationTests\bin\Release\Church.IntegrationTests.dll</IntegrationTestPath>
+      <UnitTestPath>$(TestSolutionDirectory)Tests\Church.UnitTests\bin\Release\Church.UnitTests.dll</UnitTestPath>
+      <IntegrationTestPath>$(TestSolutionDirectory)TestBinaries\Church.IntegrationTests.dll</IntegrationTestPath>
       <TestsOutputPath>$(TestSolutionDirectory)Church.Web\Developer\</TestsOutputPath>
       <UnitTestOutputPath>$(TestsOutputPath)UnitTestResults\</UnitTestOutputPath>
       <IntegrationTestOutputPath>$(TestsOutputPath)IntegrationTestResults\</IntegrationTestOutputPath>
