@@ -62,7 +62,7 @@
     var Page = (function () {
         function Page() {
         }
-        Page.login = function ($window, api) {
+        Page.login = function ($location, api) {
             var request = {
                 UserName: pageDetails.login.userName,
                 Password: pageDetails.login.password
@@ -72,10 +72,10 @@
                 if (response.LoginStatus === loginStatus.Success) {
                     requestValidationToken = response.RequestValidationToken;
                     pageDetails.showLogin = false;
-                    if ($window.location.hash.indexOf("Private") > 0) {
-                        Page.navigate($window);
+                    if ($location.hash().indexOf("Private") > 0) {
+                        Page.navigate($location);
                     } else {
-                        $window.location.hash = "Private/Welcome";
+                        $location.path("Private/Welcome");
                     }
                 } else {
                     pageDetails.showLoginFailed = true;
@@ -84,8 +84,8 @@
             });
         };
 
-        Page.navigate = function ($window) {
-            var pageName = $window.location.hash;
+        Page.navigate = function ($location) {
+            var pageName = $location.path();
             if (pageName.indexOf("#") === 0) {
                 pageName = pageName.substr(1);
             }
@@ -155,7 +155,8 @@
     function initialize() {
         "use strict";
         churchApp.controller("church", [
-            "$scope", "$window", "api", function ($scope, $window, api) {
+            "$scope", "$location", "api",
+            function ($scope, $location, api) {
                 $scope.translations = {
                     userName: "User Name",
                     password: "Password",
@@ -163,11 +164,11 @@
                     loginFailed: "User name or password incorrect."
                 };
                 pageDetails.login.login = function () {
-                    Page.login($window, api);
+                    Page.login($location, api);
                 };
                 $scope.data = pageDetails;
                 $scope.$on("$locationChangeSuccess", function () {
-                    Page.navigate($window);
+                    Page.navigate($location);
                 });
                 masterPageScope = $scope;
             }]);

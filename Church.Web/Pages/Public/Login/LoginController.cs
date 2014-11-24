@@ -44,6 +44,7 @@ namespace Church.Web.Pages.Public.Login
                 case SignInStatus.Success:
                     string requestValidationToken;
                     string cookieToken;
+                    this.User = this.signInManager.AuthenticationManager.AuthenticationResponseGrant.Principal;
                     AntiForgery.GetTokens(null, out cookieToken, out requestValidationToken);
                     LoginResponse loginResponse = new LoginResponse(LoginStatus.Success)
                     {

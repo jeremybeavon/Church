@@ -61,7 +61,7 @@ var loginStatus: any = {
 };
 
 class Page {
-    public static login($window: ng.IWindowService, api: IApi): void {
+    public static login($location: ng.ILocationService, api: IApi): void {
         var request: any = {
             UserName: pageDetails.login.userName,
             Password: pageDetails.login.password
@@ -71,10 +71,10 @@ class Page {
             if (response.LoginStatus === loginStatus.Success) {
                 requestValidationToken = response.RequestValidationToken;
                 pageDetails.showLogin = false;
-                if ($window.location.hash.indexOf("Private") > 0) {
-                    Page.navigate($window);
+                if ($location.hash().indexOf("Private") > 0) {
+                    Page.navigate($location);
                 } else {
-                    $window.location.hash = "Private/Welcome";
+                    $location.path("Private/Welcome");
                 }
             } else {
                 pageDetails.showLoginFailed = true;
@@ -83,8 +83,8 @@ class Page {
         });
     }
 
-    public static navigate($window: ng.IWindowService): void {
-        var pageName: string = $window.location.hash;
+    public static navigate($location: ng.ILocationService): void {
+        var pageName: string = $location.path();
         if (pageName.indexOf("#") === 0) {
             pageName = pageName.substr(1);
         }
@@ -165,22 +165,23 @@ churchApp.config(function ($controllerProvider: any): void {
 
 export function initialize(): void {
     "use strict";
-    churchApp.controller("church", ["$scope", "$window", "api", function ($scope: any, $window: ng.IWindowService, api: IApi): void {
-        $scope.translations = {
-            userName: "User Name",
-            password: "Password",
-            logIn: "Log in",
-            loginFailed: "User name or password incorrect."
-        };
-        pageDetails.login.login = function (): void {
-            Page.login($window, api);
-        };
-        $scope.data = pageDetails;
-        $scope.$on("$locationChangeSuccess", function (): void {
-            Page.navigate($window);
-        });
-        masterPageScope = $scope;
-    }]);
+    churchApp.controller("church", ["$scope", "$location", "api",
+        function ($scope: any, $location: ng.ILocationService, api: IApi): void {
+            $scope.translations = {
+                userName: "User Name",
+                password: "Password",
+                logIn: "Log in",
+                loginFailed: "User name or password incorrect."
+            };
+            pageDetails.login.login = function (): void {
+                Page.login($location, api);
+            };
+            $scope.data = pageDetails;
+            $scope.$on("$locationChangeSuccess", function (): void {
+                Page.navigate($location);
+            });
+            masterPageScope = $scope;
+        }]);
     Page.initialize({}, [], (): void => {
         angular.bootstrap(document, ["ChurchApp"]);
         $(".show-on-bootstrap").show();
