@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Church.IntegrationTests.Framework
 {
@@ -12,7 +13,6 @@ namespace Church.IntegrationTests.Framework
         public void InitializeTracing(AppDomain destinationDomain)
         {
             Trace.Listeners.Add(new CrossDomainTraceListener(destinationDomain));
-            Trace.WriteLine("This is a test.");
         }
 
         public override object InitializeLifetimeService()
