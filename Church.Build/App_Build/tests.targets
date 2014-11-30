@@ -3,16 +3,15 @@
   <Target Name="Tests-AfterBuild" AfterTargets="AfterBuild" Condition="'$(Configuration)' == 'Release'">
     <PropertyGroup>
       <TestSolutionDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\'))</TestSolutionDirectory>
-      <TestsDirectory>$(TestSolutionDirectory)Tests\</TestsDirectory>
-      <UnitTestPath>$(TestsDirectory)Church.UnitTests\bin\Release\Church.UnitTests.dll</UnitTestPath>
-      <IntegrationTestPath>$(TestsDirectory)Church.IntegrationTests\bin\Release\Church.Integration.dll</IntegrationTestPath>
+      <UnitTestPath>$(TestSolutionDirectory)Tests\Church.UnitTests\bin\Release\Church.UnitTests.dll</UnitTestPath>
+      <IntegrationTestPath>$(TestSolutionDirectory)TestBinaries\Church.IntegrationTests.dll</IntegrationTestPath>
       <TestsOutputPath>$(TestSolutionDirectory)Church.Web\Developer\</TestsOutputPath>
       <UnitTestOutputPath>$(TestsOutputPath)UnitTestResults\</UnitTestOutputPath>
       <IntegrationTestOutputPath>$(TestsOutputPath)IntegrationTestResults\</IntegrationTestOutputPath>
       <UnitTestCoveragePath>$(UnitTestOutputPath)Coverage.xml</UnitTestCoveragePath>
       <IntegrationTestCoveragePath>$(IntegrationTestOutputPath)Coverage.xml</IntegrationTestCoveragePath>
       <UnitTestCoverageDirectory>$(UnitTestOutputPath)Coverage</UnitTestCoverageDirectory>
-      <IntegrationTestCoverageDirectory>$(IntegrationTestOutputPath)Coverage.xml</IntegrationTestCoverageDirectory>
+      <IntegrationTestCoverageDirectory>$(IntegrationTestOutputPath)Coverage</IntegrationTestCoverageDirectory>
       <ReportCommand>&quot;$(TestSolutionDirectory)packages\ReportGenerator.2.0.1.0\ReportGenerator.exe&quot;</ReportCommand>
       <TestCommand>&quot;$(TestSolutionDirectory)packages\OpenCover.4.5.3207\OpenCover.Console.exe&quot;</TestCommand>
       <TestCommand>$(TestCommand) -filter:&quot;+[Church*]* -[Church.*Test*]*&quot;</TestCommand>
@@ -48,7 +47,7 @@
     <MakeDir Directories="$(UnitTestCoverageDirectory);$(IntegrationTestCoverageDirectory)" />
     <Exec Command="$(UnitTestCommand)" WorkingDirectory="$(UnitTestOutputPath)" />
     <Exec Command="$(UnitTestReportCommand)" WorkingDirectory="$(UnitTestOutputPath)" />
-    <!--<Exec Command="$(IntegrationTestCommand)" WorkingDirectory="$(IntegrationTestOutputPath)" />
-    <Exec Command="$(IntegrationTestReportCommand)" WorkingDirectory="$(IntegrationTestOutputPath)" />-->
+    <Exec Command="$(IntegrationTestCommand)" WorkingDirectory="$(IntegrationTestOutputPath)" />
+    <Exec Command="$(IntegrationTestReportCommand)" WorkingDirectory="$(IntegrationTestOutputPath)" />
   </Target>
 </Project>

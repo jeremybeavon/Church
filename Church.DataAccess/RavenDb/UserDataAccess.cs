@@ -6,6 +6,7 @@ using Church.Common;
 using Church.Data;
 using Church.DataAccess;
 using Church.DataAccess.RavenDb;
+using NullGuard;
 using Raven.Client;
 
 [assembly: RegisterBinding(typeof(Binding<IUserDataAccess, UserDataAccess>), RavenDbDependencyModule.Container)]
@@ -84,6 +85,7 @@ namespace Church.DataAccess.RavenDb
         /// </summary>
         /// <param name="userName">The user name to find.</param>
         /// <returns>A task that represents finding the specified user.</returns>
+        [return: AllowNull]
         public async Task<User> FindByNameAsync(string userName)
         {
             using (IAsyncDocumentSession session = CreateSession())

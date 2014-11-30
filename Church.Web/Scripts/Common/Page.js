@@ -46,6 +46,7 @@
         url: "",
         title: "",
         showLogin: requestValidationToken === "",
+        showLoginFailed: false,
         login: {
             userName: "",
             password: "",
@@ -53,32 +54,38 @@
         }
     };
 
+    var loginStatus = {
+        Success: 1,
+        IncorrectUserNameOrPassword: 2
+    };
+
     var Page = (function () {
         function Page() {
         }
-        Page.login = function ($window, api) {
+        Page.login = function ($location, api) {
             var request = {
                 UserName: pageDetails.login.userName,
                 Password: pageDetails.login.password
             };
 
             api.post("/login", request).success(function (response) {
-                if (response.LoginStatus === 1) {
+                if (response.LoginStatus === loginStatus.Success) {
                     requestValidationToken = response.RequestValidationToken;
                     pageDetails.showLogin = false;
-                    if ($window.location.hash.indexOf("Private") > 0) {
-                        Page.navigate($window);
+                    if ($location.hash().indexOf("Private") > 0) {
+                        Page.navigate($location);
                     } else {
-                        $window.location.hash = "Private/Welcome";
+                        $location.path("Private/Welcome");
                     }
                 } else {
-                    alert("error: something bad happened.");
+                    pageDetails.showLoginFailed = true;
+                    exports.updateMasterPage();
                 }
             });
         };
 
-        Page.navigate = function ($window) {
-            var pageName = $window.location.hash;
+        Page.navigate = function ($location) {
+            var pageName = $location.path();
             if (pageName.indexOf("#") === 0) {
                 pageName = pageName.substr(1);
             }
@@ -148,18 +155,20 @@
     function initialize() {
         "use strict";
         churchApp.controller("church", [
-            "$scope", "$window", "api", function ($scope, $window, api) {
+            "$scope", "$location", "api",
+            function ($scope, $location, api) {
                 $scope.translations = {
                     userName: "User Name",
                     password: "Password",
-                    logIn: "Log in"
+                    logIn: "Log in",
+                    loginFailed: "User name or password incorrect."
                 };
                 pageDetails.login.login = function () {
-                    Page.login($window, api);
+                    Page.login($location, api);
                 };
                 $scope.data = pageDetails;
                 $scope.$on("$locationChangeSuccess", function () {
-                    Page.navigate($window);
+                    Page.navigate($location);
                 });
                 masterPageScope = $scope;
             }]);

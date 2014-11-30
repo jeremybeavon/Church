@@ -6,6 +6,7 @@ using Church.BusinessRules;
 using Church.Data;
 using EnsureThat;
 using Microsoft.AspNet.Identity;
+using NullGuard;
 
 namespace Church.Web.Identity
 {
@@ -134,6 +135,7 @@ namespace Church.Web.Identity
         /// </summary>
         /// <param name="userName">The user name to find.</param>
         /// <returns>A task that represents finding the specified user.</returns>
+        [return: AllowNull]
         public async Task<ChurchUser> FindByNameAsync(string userName)
         {
             return this.GetChurchUser(await this.userManager.FindByNameAsync(userName));
@@ -480,7 +482,8 @@ namespace Church.Web.Identity
         /// </summary>
         /// <param name="user">The user to convert to a ChurchUser.</param>
         /// <returns>A ChurchUser based on the specified user.</returns>
-        private ChurchUser GetChurchUser(User user)
+        [return: AllowNull]
+        private ChurchUser GetChurchUser([AllowNull] User user)
         {
             return user == null ? null : new ChurchUser(user);
         }
