@@ -3,6 +3,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Helpers;
 using System.Web.Http;
+using Church.BusinessRules;
 using Church.Data;
 using Church.Web.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -20,12 +21,19 @@ namespace Church.Web.Pages.Public.Login
         private readonly ChurchSignInManager signInManager;
 
         /// <summary>
+        /// The user audit manager.
+        /// </summary>
+        private readonly IUserAuditManager userAuditManager;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="LoginController"/> class.
         /// </summary>
         /// <param name="signInManager">The sign-in manager.</param>
-        public LoginController(ChurchSignInManager signInManager)
+        /// <param name="userAuditManager">The user audit manager.</param>
+        public LoginController(ChurchSignInManager signInManager, IUserAuditManager userAuditManager)
         {
             this.signInManager = signInManager;
+            this.userAuditManager = userAuditManager;
         }
 
         /// <summary>
@@ -46,6 +54,7 @@ namespace Church.Web.Pages.Public.Login
                     string cookieToken;
                     this.User = this.signInManager.AuthenticationManager.AuthenticationResponseGrant.Principal;
                     AntiForgery.GetTokens(null, out cookieToken, out requestValidationToken);
+                    await this.userAuditManager.AddAuditAsync(AuditEvent.LoginSuccess);
                     LoginResponse loginResponse = new LoginResponse(LoginStatus.Success)
                     {
                         RequestValidationToken = requestValidationToken
@@ -54,6 +63,7 @@ namespace Church.Web.Pages.Public.Login
                     response.Headers.AddCookies(new[] { new CookieHeaderValue(AntiForgeryHelper.CookieName, cookieToken) });
                     return response;
                 default:
+                    await this.userAuditManager.AddAuditAsync(AuditEvent.LoginFailure);
                     return Request.CreateResponse<LoginResponse>(new LoginResponse(LoginStatus.IncorrectUserNameOrPassword));
             }
         }

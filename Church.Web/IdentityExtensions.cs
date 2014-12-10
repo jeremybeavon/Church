@@ -40,7 +40,7 @@ namespace Church.Web
         /// <param name="identity">The identity to search.</param>
         /// <param name="name">The claim name to find.</param>
         /// <returns>The claim with the specified name.</returns>
-        private static string GetClaim(ClaimsIdentity identity, string name)
+        internal static string GetClaim(ClaimsIdentity identity, string name)
         {
             Claim claim = identity.FindFirst(name);
             if (claim == null)

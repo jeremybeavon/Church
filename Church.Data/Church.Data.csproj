@@ -50,7 +50,9 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditEvent.cs" />
     <Compile Include="PrayerRequestItem.cs" />
+    <Compile Include="UserAudit.cs" />
     <Compile Include="UserReference.cs" />
     <Compile Include="LoginRequest.cs" />
     <Compile Include="LoginResponse.cs" />

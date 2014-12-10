@@ -66,6 +66,7 @@
       <HintPath>..\packages\Sendgrid.5.0.0\lib\SendGridMail.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
@@ -73,6 +74,8 @@
     <Compile Include="AbstractData.cs" />
     <Compile Include="Binding.cs" />
     <Compile Include="Dependencies\IBindingProvider.cs" />
+    <Compile Include="IDateTime.cs" />
+    <Compile Include="Internal\ChurchDateTime.cs" />
     <Compile Include="RegisterBindingAttribute.cs" />
     <Compile Include="Dependencies\NinjectDependencyScope.cs" />
     <Compile Include="DependencyManagerExtensions.cs" />

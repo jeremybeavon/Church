@@ -55,10 +55,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessRulesDependencyModule.cs" />
+    <Compile Include="ICurrentUserProvider.cs" />
     <Compile Include="IPrayerManager.cs" />
+    <Compile Include="IUserAuditManager.cs" />
     <Compile Include="IUserManager.cs" />
     <Compile Include="PrayerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserAuditExtensions.cs" />
+    <Compile Include="UserAuditManager.cs" />
     <Compile Include="UserManager.cs" />
   </ItemGroup>
   <ItemGroup>

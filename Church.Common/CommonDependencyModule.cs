@@ -13,6 +13,7 @@ namespace Church.Common
         /// <param name="dependencyManager">The dependency manager.</param>
         public void Load(IDependencyManager dependencyManager)
         {
+            dependencyManager.Bind<IDateTime>().To<ChurchDateTime>().InSingletonScope();
             dependencyManager.Bind<IFileHelper>().To<FileHelper>().InSingletonScope();
             dependencyManager.Bind<IObjectSerializer>().To<NewtonsoftObjectSerializer>().InSingletonScope();
             dependencyManager.Bind<ITaskSchedulerProvider>().To<TaskSchedulerProvider>().InSingletonScope();

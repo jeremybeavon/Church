@@ -10,7 +10,7 @@ namespace Church.Web.Dependencies
     /// Provides a dependency module that registers all web dependencies.
     /// </summary>
     /// <remarks>
-    /// This includes the common, file system and business rules dependency modules.
+    /// This includes the common, data access and business rules dependency modules.
     /// </remarks>
     public sealed class WebDependencyModule : IDependencyModule
     {
@@ -27,6 +27,7 @@ namespace Church.Web.Dependencies
                 new CommonDependencyModule(),
                 new BusinessRulesDependencyModule());
             dependencyManager.Bind<ChurchSignInManager>().ToOwinContext();
+            dependencyManager.Bind<ICurrentUserProvider>().To<CurrentUserProvider>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using NullGuard;
 
 namespace Church.Common
@@ -12,6 +13,7 @@ namespace Church.Common
         /// Gets or sets the id of this object.
         /// </summary>
         [AllowNull]
+        [NotMapped]
         public string Id { get; set; }
     }
 }
