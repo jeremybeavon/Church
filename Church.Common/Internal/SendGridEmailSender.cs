@@ -11,12 +11,12 @@ namespace Church.Common.Internal
     public sealed class SendGridEmailSender : IEmailSender
     {
         /// <summary>
-        /// The send grid user name
+        /// The send grid user name.
         /// </summary>
         private const string SendGridUserName = "SendGridUserName";
 
         /// <summary>
-        /// The send grid password
+        /// The send grid password.
         /// </summary>
         private const string SendGridPassword = "SendGridPassword";
 
