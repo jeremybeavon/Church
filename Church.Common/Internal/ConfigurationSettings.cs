@@ -32,7 +32,7 @@ namespace Church.Common.Internal
         /// <returns>The boolean setting.</returns>
         public bool GetBooleanSetting(string settingName, bool defaultValue)
         {
-            string setting = GetSetting(settingName);
+            string setting = this.GetSetting(settingName);
             bool booleanSetting;
             return bool.TryParse(setting, out booleanSetting) ? booleanSetting : defaultValue;
         }
