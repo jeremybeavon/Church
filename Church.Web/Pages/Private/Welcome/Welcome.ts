@@ -6,7 +6,7 @@ Page.addController("welcome", ["$scope", "api", function ($scope: Page.IControll
         Id: "Burundi",
         Requests: []
     };
-    return api.get("/prayer/needs/Burundi").success((data: any): any => {
+    return api.get("prayer/needs/Burundi").success((data: any): any => {
         $scope.data.Requests = data;
         return data;
     });

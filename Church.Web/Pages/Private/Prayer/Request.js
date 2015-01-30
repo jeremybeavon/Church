@@ -16,7 +16,7 @@
                         Name: $scope.data.name,
                         Url: $scope.data.url
                     };
-                    api.post("/prayer/request", request).then(function (response) {
+                    api.post("prayer/request", request).then(function (response) {
                         $window.location.hash = "Private/Welcome";
                     });
                 }

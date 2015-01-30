@@ -23,5 +23,18 @@ namespace Church.Common.Internal
         {
             return ConfigurationManager.AppSettings[settingName];
         }
+
+        /// <summary>
+        /// Gets the boolean setting.
+        /// </summary>
+        /// <param name="settingName">Name of the setting.</param>
+        /// <param name="defaultValue">The default value if the setting is not found or not valid.</param>
+        /// <returns>The boolean setting.</returns>
+        public bool GetBooleanSetting(string settingName, bool defaultValue)
+        {
+            string setting = GetSetting(settingName);
+            bool booleanSetting;
+            return bool.TryParse(setting, out booleanSetting) ? booleanSetting : defaultValue;
+        }
     }
 }

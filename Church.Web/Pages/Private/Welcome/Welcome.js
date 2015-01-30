@@ -6,7 +6,7 @@
                 Id: "Burundi",
                 Requests: []
             };
-            return api.get("/prayer/needs/Burundi").success(function (data) {
+            return api.get("prayer/needs/Burundi").success(function (data) {
                 $scope.data.Requests = data;
                 return data;
             });

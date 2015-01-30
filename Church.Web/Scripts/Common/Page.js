@@ -68,7 +68,7 @@
                 Password: pageDetails.login.password
             };
 
-            api.post("/login", request).success(function (response) {
+            api.post("login", request).success(function (response) {
                 if (response.LoginStatus === loginStatus.Success) {
                     requestValidationToken = response.RequestValidationToken;
                     pageDetails.showLogin = false;
@@ -113,16 +113,16 @@
                         path = pageNameSplit.splice(3);
                     }
                 }
-                pageName = "/Pages/" + area + "/" + page + "/" + action;
+                pageName = "Pages/" + area + "/" + page + "/" + action;
                 jsPath = pageName + ".js";
                 htmlPath = pageName + ".html";
             } else {
                 area = "public";
-                jsPath = "/Pages/Public/Welcome/Welcome.js";
-                htmlPath = "/Pages/Public/Welcome/Welcome.html";
+                jsPath = "Pages/Public/Welcome/Welcome.js";
+                htmlPath = "Pages/Public/Welcome/Welcome.html";
             }
 
-            pageDetails.showLogin = jsPath.toLowerCase() === "/pages/public/welcome/welcome.js" || requestValidationToken === "";
+            pageDetails.showLogin = jsPath.toLowerCase() === "pages/public/welcome/welcome.js" || requestValidationToken === "";
             if (area.toLowerCase() === "public" || requestValidationToken !== "") {
                 require([jsPath], function (page) {
                     pageDetails.url = htmlPath;

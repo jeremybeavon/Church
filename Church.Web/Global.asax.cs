@@ -13,6 +13,11 @@ namespace Church.Web
     public class WebApiApplication : HttpApplication
     {
         /// <summary>
+        /// The require SSL configuration key.
+        /// </summary>
+        private const string requireSslConfigKey = "RequireSSL";
+
+        /// <summary>
         /// Initializes the web application.
         /// </summary>
         protected void Application_Start()
@@ -31,7 +36,10 @@ namespace Church.Web
             configuration.DependencyResolver = new WebDependencyResolver();
             configuration.Filters.Add(new AuthorizeAttribute());
             configuration.Filters.Add(new ValidateAntiForgeryTokenAttribute());
-            configuration.MessageHandlers.Add(new RequireHttpsHandler());
+            if (DependencyManager.Get<IConfigurationSettings>().GetBooleanSetting(requireSslConfigKey, true))
+            {
+                configuration.MessageHandlers.Add(new RequireHttpsHandler());
+            }
         }
     }
 }

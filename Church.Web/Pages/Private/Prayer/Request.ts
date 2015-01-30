@@ -17,7 +17,7 @@ Page.addController("prayerRequest",
                     Name: $scope.data.name,
                     Url: $scope.data.url
                 };
-                api.post<any>("/prayer/request", request).then(function (response: any): void {
+                api.post<any>("prayer/request", request).then(function (response: any): void {
                     $window.location.hash = "Private/Welcome";
                 });
             }
