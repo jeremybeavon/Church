@@ -49,5 +49,18 @@ namespace Church.DataAccess.RavenDb
                         }).ToListAsync();
             }
         }
+
+        /// <summary>
+        /// Gets the prayer request.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>The prayer request.</returns>
+        public async Task<PrayerRequest> GetPrayerRequest(string id)
+        {
+            using (IAsyncDocumentSession session = CreateSession())
+            {
+                return await session.LoadAsync<PrayerRequest>(id);
+            }
+        }
     }
 }

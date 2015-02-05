@@ -5,17 +5,17 @@ Page.addController("prayerRequest",
     ["$scope", "$window", "api", function ($scope: Page.IControllerScope, $window: ng.IWindowService, api: Page.IApi): void {
         $scope.translations = {
             name: "Name",
-            url: "URL",
+            text: "Text",
             request: "Request"
         };
         $scope.data = {
             name: "",
-            url: "",
+            text: "",
             requestPrayer: function (): void {
                 var request: any = {
                     Topic: topic,
                     Name: $scope.data.name,
-                    Url: $scope.data.url
+                    Text: $scope.data.url
                 };
                 api.post<any>("prayer/request", request).then(function (response: any): void {
                     $window.location.hash = "Private/Welcome";
@@ -27,5 +27,5 @@ Page.addController("prayerRequest",
 export function initialize(path: string[]): void {
     "use strict";
     topic = path[0];
-    Page.setTitle("Request Prayer for " + topic);
+    Page.setTitle("Request Prayer");
 }

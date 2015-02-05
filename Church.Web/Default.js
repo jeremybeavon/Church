@@ -1,4 +1,4 @@
-﻿require(["Scripts/Common/Page"], function (page) {
+require(["Scripts/Common/Page"], function (page) {
     console.log("JB Test");
     page.initialize();
 });

@@ -25,5 +25,12 @@ namespace Church.BusinessRules
         /// <param name="topic">The topic to search.</param>
         /// <returns>A task that represents getting the 10 latest prayer request for the specified topic.</returns>
         Task<IList<PrayerRequestItem>> GetLatestPrayerRequests(string topic);
+
+        /// <summary>
+        /// Gets the prayer request.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>The prayer request.</returns>
+        Task<PrayerRequest> GetPrayerRequest(string id);
     }
 }

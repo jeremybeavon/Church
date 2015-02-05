@@ -1,9 +1,6 @@
-﻿define(["require", "exports", "Scripts/Common/Page"], function(require, exports, Page) {
-    Page.addController("prayerNeeds", [
-        "$scope", "$sce", function ($scope, $sce) {
-            $scope.data = {
-                Url: $sce.trustAsResourceUrl("https://www.wvi.org/burundi/article/hope-orphan-girl")
-            };
-        }]);
+define(["require", "exports", "Scripts/Common/Page"], function (require, exports, Page) {
+    Page.addController("prayerNeeds", ["$scope", function ($scope) {
+        $scope.data = {};
+    }]);
 });
 //# sourceMappingURL=Needs.js.map

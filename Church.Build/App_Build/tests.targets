@@ -12,8 +12,8 @@
       <IntegrationTestCoveragePath>$(IntegrationTestOutputPath)Coverage.xml</IntegrationTestCoveragePath>
       <UnitTestCoverageDirectory>$(UnitTestOutputPath)Coverage</UnitTestCoverageDirectory>
       <IntegrationTestCoverageDirectory>$(IntegrationTestOutputPath)Coverage</IntegrationTestCoverageDirectory>
-      <ReportCommand>&quot;$(TestSolutionDirectory)packages\ReportGenerator.2.0.1.0\ReportGenerator.exe&quot;</ReportCommand>
-      <TestCommand>&quot;$(TestSolutionDirectory)packages\OpenCover.4.5.3207\OpenCover.Console.exe&quot;</TestCommand>
+      <ReportCommand>&quot;$(TestSolutionDirectory)packages\ReportGenerator.2.0.4.0\ReportGenerator.exe&quot;</ReportCommand>
+      <TestCommand>&quot;$(TestSolutionDirectory)packages\OpenCover.4.5.3522\OpenCover.Console.exe&quot;</TestCommand>
       <TestCommand>$(TestCommand) -filter:&quot;+[Church*]* -[Church.*Test*]*&quot;</TestCommand>
       <TestCommand>$(TestCommand) -register:user</TestCommand>
       <TestCommand>$(TestCommand) -coverbytest:+Church.*Tests.dll</TestCommand>

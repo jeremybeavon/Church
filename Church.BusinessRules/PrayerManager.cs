@@ -50,5 +50,15 @@ namespace Church.BusinessRules
         {
             return this.prayerDataAccess.GetLatestPrayerRequests(topic);
         }
+
+        /// <summary>
+        /// Gets the prayer request.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>The prayer request.</returns>
+        public Task<PrayerRequest> GetPrayerRequest(string id)
+        {
+            return this.prayerDataAccess.GetPrayerRequest(id);
+        }
     }
 }

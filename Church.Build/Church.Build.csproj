@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <NuGetPackageImportStamp>2c5c7aeb</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>5c30acb9</NuGetPackageImportStamp>
     <DontImportPostSharp>True</DontImportPostSharp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -38,11 +38,11 @@
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="Ncapsulate.Gulp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NCapsulateExtensions.Gulp.TsLint.0.0.1\lib\net45\Ncapsulate.Gulp.dll</HintPath>
+      <HintPath>..\packages\Ncapsulate.Gulp.3.8.10.1\lib\net45\Ncapsulate.Gulp.dll</HintPath>
     </Reference>
     <Reference Include="Ncapsulate.Node, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NCapsulateExtensions.Gulp.TsLint.0.0.1\lib\net45\Ncapsulate.Node.dll</HintPath>
+      <HintPath>..\packages\Ncapsulate.Gulp.3.8.10.1\lib\net45\Ncapsulate.Node.dll</HintPath>
     </Reference>
     <Reference Include="NCapsulateExtensions.Gulp.TsLint">
       <HintPath>..\packages\NCapsulateExtensions.Gulp.TsLint.0.0.1\lib\net45\NCapsulateExtensions.Gulp.TsLint.dll</HintPath>
@@ -50,9 +50,9 @@
     <Reference Include="NCapsulateExtensions.TsLint">
       <HintPath>..\packages\NCapsulateExtensions.Gulp.TsLint.0.0.1\lib\net45\NCapsulateExtensions.TsLint.dll</HintPath>
     </Reference>
-    <Reference Include="PostSharp, Version=4.0.36.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
+    <Reference Include="PostSharp, Version=4.0.41.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PostSharp.4.0.36\lib\net35-client\PostSharp.dll</HintPath>
+      <HintPath>..\packages\PostSharp.4.0.41\lib\net35-client\PostSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -74,6 +74,8 @@
     <None Include="App_Build\documentation.targets">
       <SubType>Designer</SubType>
     </None>
+    <None Include="App_Build\gulp.targets" />
+    <None Include="App_Build\node.targets" />
     <None Include="App_Build\publish.targets" />
     <None Include="App_Build\tests.targets" />
     <None Include="gulp.cmd" />
@@ -127,17 +129,17 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Ncapsulate.Node.0.10.28\build\Ncapsulate.Node.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Ncapsulate.Node.0.10.28\build\Ncapsulate.Node.targets'))" />
-    <Error Condition="!Exists('..\packages\Ncapsulate.Gulp.3.6.2.2\build\Ncapsulate.Gulp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Ncapsulate.Gulp.3.6.2.2\build\Ncapsulate.Gulp.targets'))" />
+    <Error Condition="!Exists('..\packages\Ncapsulate.Node.0.10.35.1\build\Ncapsulate.Node.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Ncapsulate.Node.0.10.35.1\build\Ncapsulate.Node.targets'))" />
+    <Error Condition="!Exists('..\packages\Ncapsulate.Gulp.3.8.10.1\build\Ncapsulate.Gulp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Ncapsulate.Gulp.3.8.10.1\build\Ncapsulate.Gulp.targets'))" />
   </Target>
-  <Import Project="..\packages\Ncapsulate.Node.0.10.28\build\Ncapsulate.Node.targets" Condition="Exists('..\packages\Ncapsulate.Node.0.10.28\build\Ncapsulate.Node.targets')" />
-  <Import Project="..\packages\Ncapsulate.Gulp.3.6.2.2\build\Ncapsulate.Gulp.targets" Condition="Exists('..\packages\Ncapsulate.Gulp.3.6.2.2\build\Ncapsulate.Gulp.targets')" />
   <Import Project="App_Build\tests.targets" />
   <Import Project="App_Build\documentation.targets" />
-  <Import Project="..\packages\PostSharp.4.0.36\tools\PostSharp.targets" Condition="Exists('..\packages\PostSharp.4.0.36\tools\PostSharp.targets')" />
+  <Import Project="..\packages\Ncapsulate.Node.0.10.35.1\build\Ncapsulate.Node.targets" Condition="Exists('..\packages\Ncapsulate.Node.0.10.35.1\build\Ncapsulate.Node.targets')" />
+  <Import Project="..\packages\Ncapsulate.Gulp.3.8.10.1\build\Ncapsulate.Gulp.targets" Condition="Exists('..\packages\Ncapsulate.Gulp.3.8.10.1\build\Ncapsulate.Gulp.targets')" />
+  <Import Project="..\packages\PostSharp.4.0.41\tools\PostSharp.targets" Condition="Exists('..\packages\PostSharp.4.0.41\tools\PostSharp.targets')" />
   <Target Name="EnsurePostSharpImported" BeforeTargets="BeforeBuild" Condition="'$(PostSharp30Imported)' == ''">
-    <Error Condition="!Exists('..\packages\PostSharp.4.0.36\tools\PostSharp.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore." />
-    <Error Condition="Exists('..\packages\PostSharp.4.0.36\tools\PostSharp.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://www.postsharp.net/links/nuget-restore." />
+    <Error Condition="!Exists('..\packages\PostSharp.4.0.41\tools\PostSharp.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore." />
+    <Error Condition="Exists('..\packages\PostSharp.4.0.41\tools\PostSharp.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://www.postsharp.net/links/nuget-restore." />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
