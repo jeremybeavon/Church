@@ -1146,9 +1146,9 @@
     <Error Condition="!Exists('..\packages\Ncapsulate.Gulp.3.8.10.1\build\Ncapsulate.Gulp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Ncapsulate.Gulp.3.8.10.1\build\Ncapsulate.Gulp.targets'))" />
     <Error Condition="!Exists('..\packages\NCapsulateExtensions.Gulp.TsLint.0.0.1\build\gulp.tslint.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NCapsulateExtensions.Gulp.TsLint.0.0.1\build\gulp.tslint.targets'))" />
   </Target>
-  <Import Project="..\packages\Ncapsulate.Node.0.10.35.1\build\Ncapsulate.Node.targets" Condition="Exists('..\packages\Ncapsulate.Node.0.10.35.1\build\Ncapsulate.Node.targets')" />
+  <!--<Import Project="..\packages\Ncapsulate.Node.0.10.35.1\build\Ncapsulate.Node.targets" Condition="Exists('..\packages\Ncapsulate.Node.0.10.35.1\build\Ncapsulate.Node.targets')" />
   <Import Project="..\packages\Ncapsulate.Gulp.3.8.10.1\build\Ncapsulate.Gulp.targets" Condition="Exists('..\packages\Ncapsulate.Gulp.3.8.10.1\build\Ncapsulate.Gulp.targets')" />
-  <Import Project="..\packages\NCapsulateExtensions.Gulp.TsLint.0.0.1\build\gulp.tslint.targets" Condition="Exists('..\packages\NCapsulateExtensions.Gulp.TsLint.0.0.1\build\gulp.tslint.targets')" />
+  <Import Project="..\packages\NCapsulateExtensions.Gulp.TsLint.0.0.1\build\gulp.tslint.targets" Condition="Exists('..\packages\NCapsulateExtensions.Gulp.TsLint.0.0.1\build\gulp.tslint.targets')" />-->
   <Import Project="..\packages\Fody.1.26.4\build\Fody.targets" Condition="Exists('..\packages\Fody.1.26.4\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
